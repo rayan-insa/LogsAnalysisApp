@@ -19,29 +19,29 @@ using namespace std;
 #include "Noeud.h"
 
 //----------------------------------------------------------------- PUBLIC
-unsigned int Noeud::CountNodes = 0;
+unsigned int Noeud::countNodes = 0;
 //-------------------------------------------- Constructeurs - destructeur
 Noeud::Noeud ()
 {
 	#ifdef MAP
         cout << "Appel au constructeur de <Noeud>" << endl;
     #endif
-    NodeName = "INCONNU";
+    nodeName = "INCONNU";
 	countLinks = 0;
-    NodeNum = CountNodes;
-    CountNodes++;
+    nodeNum = countNodes;
+    countNodes++;
     links = map < string, int>();
 }//----- Fin du constructeur de Noeud
 
-Noeud::Noeud (string NodeName)
+Noeud::Noeud (string nodeName)
 {
 	#ifdef MAP
         cout << "Appel au constructeur de <Noeud>" << endl;
     #endif
-    this->NodeName = NodeName;
+    this->nodeName = NodeName;
 	countLinks = 0;
-    NodeNum = Noeud::CountNodes; 
-    Noeud::CountNodes++;
+    nodeNum = Noeud::countNodes; 
+    Noeud::countNodes++;
 }//----- Fin du constructeur de Noeud
 
 Noeud::~Noeud()
@@ -63,25 +63,25 @@ const map < string, int > & Noeud::getLinks() const
 
 const string Noeud::getNodeName() const
 {
-    return NodeName;
+    return nodeName;
 } //----- Fin de getNodeName
 
 unsigned int Noeud::getNodeNum() const
 {
-    return NodeNum;
+    return nodeNum;
 } //----- Fin de getNodeNum
 
-void Noeud::addLink(string NodeName, bool cond)
+void Noeud::addLink(string nodeName, bool cond)
 {
     if(cond)
     {
-        if(links.count(NodeName)!= 0)
+        if(links.count(nodeName)!= 0)
         {
-            links[NodeName]++;
+            links[nodeName]++;
         }
         else
         {
-            links.emplace(NodeName,1);
+            links.emplace(nodeName,1);
         }
     }
 
@@ -108,7 +108,7 @@ bool Noeud::operator > (const Noeud & newNode) const
     }
     else
     {
-    	compare = (NodeName > newNode.getNodeName());
+    	compare = (nodeName > newNode.getNodeName());
     }
     return compare;
 } //----- Fin de la surcharge de operator >

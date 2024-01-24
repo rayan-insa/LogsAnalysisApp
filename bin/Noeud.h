@@ -22,7 +22,7 @@ public:
 //-------------------------------------------- Constructeurs - destructeur
     Noeud();
     
-    Noeud(string NodeName);
+    Noeud(string nodeName);
 
     virtual ~Noeud();
     unsigned int getCountLinks() const;
@@ -42,11 +42,11 @@ public:
 //------------------------------------------------------------------ PRIVE 
 //----------------------------------------------------- Attributs protégés
 protected:
-    string NodeName;
-    unsigned int NodeNum;
+    string nodeName;
+    unsigned int nodeNum;
     unsigned int countLinks;
     map < string, int> links;
-    static unsigned int CountNodes;
+    static unsigned int countNodes;
 
 };
 
