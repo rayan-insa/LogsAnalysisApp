@@ -1,2 +1,1 @@
-make 
-./Analog -e anonyme.log > sortie.txt 
+./../../../bin/analog -e ./../anonyme.log > sortie.txt 
