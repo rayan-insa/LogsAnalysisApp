@@ -58,14 +58,14 @@ bool Affichage::showGraph( const map < string , Noeud > & links )
 	//Ecriture des noeuds du graph
 	for ( map <string , Noeud>::const_iterator it = links.cbegin() ; it !=  links.cend() ; it++ ) 
 	{
-		outputStream << "node" << it->second.getNumNode() << " [label = \"" << it->first << "\"];" << endl;
+		outputStream << "node" << it->second.getNodeNum() << " [label = \"" << it->first << "\"];" << endl;
 	}
 	//Parcours de la strcuture pour récupérer les liens entre noeuds
 	for ( map <string , Noeud>::const_iterator it = links.cbegin() ; it !=  links.cend() ; it++ ) 
 	{
-		for ( map < string, int >::const_iterator itInterne = it->second.getLinks().cbegin() ; itInterne != it->second.getLiens().cend() ; itInterne++)
+		for ( map < string, int >::const_iterator itInterne = it->second.getLinks().cbegin() ; itInterne != it->second.getLinks().cend() ; itInterne++)
 		{
-			outputStream << "node" << links.at(itInterne->first).getNumNode() << " -> node" << it->second.getNumNode();
+			outputStream << "node" << links.at(itInterne->first).getNodeNum() << " -> node" << it->second.getNodeNum();
 			outputStream << " [label=\"" << itInterne->second << "\"];" << endl;
 		}
 	}
@@ -84,15 +84,15 @@ bool Affichage::showGraphLinks( const vector < Noeud > & graph )
 	outputStream << "digraph " << "{" <<endl;
 	for( vector < Noeud > ::const_iterator it = graph.cbegin() ; it !=  graph.cend() ; it++ ) //parcours des noeuds du graph et ecriture
 	{
-		outputStream << "node" << it->getNodeNumber() << " [label = \"" << it->getNodeName() << "\"];" << endl;
+		outputStream << "node" << it->getNodeNum() << " [label = \"" << it->getNodeName() << "\"];" << endl;
 	}
 	for( vector < Noeud > ::const_iterator itCible = graph.cbegin() ; itCible !=  graph.cend() ; itCible++ )
 	{
 		for( vector < Noeud > ::const_iterator itSource = graph.cbegin() ; itSource!=  graph.cend() ; itSource++ )
 		{
-			if(itCible->valeurArc( itSource->getNodeName() ) != -1) //verification du lien entre les noeuds
+			if(itCible->arcVal( itSource->getNodeName() ) != -1) //verification du lien entre les noeuds
 			{
-				outputStream << "node" << itSource->getNodeNumber() << " -> node" << itCible->getNodeNumber() << " [label=\"" << itCible->valeurArc( itSource->getNodeName() ) << "\"];" << endl;
+				outputStream << "node" << itSource->getNodeNum() << " -> node" << itCible->getNodeNum() << " [label=\"" << itCible->arcVal( itSource->getNodeName() ) << "\"];" << endl;
 			}
 		}
 	}
@@ -111,7 +111,7 @@ void Affichage::showNodes( const vector < Noeud > & list )
 {
 	for ( unsigned int i = 0 ;i < list.size(); i ++ )
 	{
-		cout << list[i].getNodeName() << " (" << list[i].getNumberOfLinks() << " hits)" << endl; 
+		cout << list[i].getNodeName() << " (" << list[i].getCountLinks() << " hits)" << endl; 
 	}
 }
 
