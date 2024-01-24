@@ -19,20 +19,37 @@ class Graphe
 {
 //----------------------------------------------------------------- PUBLIC
 public:
+
 //----------------------------------------------------- Méthodes publiques
-//-------------------------------------------- Constructeur - destructeur
-    Graphe();
 
-    virtual ~Graphe();
-    const map < string , Noeud > & getArrayLinks();
+    const map < string, Noeud >& getArrayLinks();
+    // Mode d'emploi :
+    //
 
-    bool addLink(string nodeName1,string nodeName2,bool cond = true);
+    bool addLink(string nodeName1, string nodeName2, bool cond = true);
+    // Mode d'emploi :
+    //
 
     const vector < Noeud > getMostConnected(int n) const;
+    // Mode d'emploi :
+    //
+
+
+//-------------------------------------------- Constructeur - destructeur
+
+    Graphe();
+    // Mode d'emploi :
+    // Constructeur de Graphe
+
+    virtual ~Graphe();
+    // Mode d'emploi :
+    // Destructeur virtuel de Graphe
+    
 
 //------------------------------------------------------------------ PRIVE 
-//----------------------------------------------------- Attributs protégés
 protected:
+
+    //----------------------------------------------------- Attributs protégés
 
     map < string, Noeud > arrayLinks;
     unsigned int countNodes;

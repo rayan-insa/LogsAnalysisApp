@@ -7,7 +7,7 @@
 *************************************************************************/
 
 
-//---------- Réalisation de la classe LectureLog (fichier LectureLog.cpp) ------------
+//---------- Réalisation de la classe <LectureLog> (fichier LectureLog.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -110,10 +110,6 @@ string LectureLog::separate(string& line, string separator)
     line = line.substr(index + separator.size());
     return start;
 } //---------Fin de separate
-
-
-
-//------------------------------------------------- Surcharge d'opérateurs
 
 
 

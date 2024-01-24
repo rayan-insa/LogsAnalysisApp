@@ -20,8 +20,12 @@ using namespace std;
 #include "Noeud.h"
 
 //----------------------------------------------------------------- PUBLIC
+
+
 //-------------------------------------------- Constructeur - destructeur
 Graphe::Graphe()
+// Algorithme :
+//
 {
     #ifdef MAP
     	cout << "Appel au constructeur de <Graphe>" << endl;
@@ -30,19 +34,26 @@ Graphe::Graphe()
 } //----- Fin du constructeur de Graphe
 
 Graphe::~Graphe()
+// Algorithme :
+//
 {
 	#ifdef MAP
     	cout << "Appel au destructeur de <Graphe>" << endl;
 	#endif
 } //----- Fin du destructeur de Graphe
 
+
 //----------------------------------------------------- Méthodes publiques
 const map < string, Noeud > & Graphe::getArrayLinks() 
+// Algorithme :
+//
 {
 	return arrayLinks;
 } //----- Fin de getArrayLinks
 
 bool Graphe::addLink(string nodeName1, string nodeName2, bool cond)
+// Algorithme :
+//
 {
 
 	if(arrayLinks.count(nodeName2)!= 0)
@@ -66,6 +77,8 @@ bool Graphe::addLink(string nodeName1, string nodeName2, bool cond)
 } //----- Fin de addLink
 
 const vector < Noeud > Graphe::getMostConnected(int n) const
+// Algorithme :
+//
 {
 	unsigned int returnNb = 0;
 	if(n < 0 || (unsigned int)n > countNodes)

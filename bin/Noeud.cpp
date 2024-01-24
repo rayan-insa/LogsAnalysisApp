@@ -18,10 +18,16 @@ using namespace std;
 //------------------------------------------------------ Include personnel
 #include "Noeud.h"
 
-//----------------------------------------------------------------- PUBLIC
+//------------------------------------------------------------- Constantes
 unsigned int Noeud::countNodes = 0;
+
+
+//----------------------------------------------------------------- PUBLIC
+
 //-------------------------------------------- Constructeurs - destructeur
 Noeud::Noeud ()
+// Algorithme :
+//
 {
 	#ifdef MAP
         cout << "Appel au constructeur de <Noeud>" << endl;
@@ -34,6 +40,8 @@ Noeud::Noeud ()
 }//----- Fin du constructeur de Noeud
 
 Noeud::Noeud (string nodeName)
+//Algorithme :
+//
 {
 	#ifdef MAP
         cout << "Appel au constructeur de <Noeud>" << endl;
@@ -45,33 +53,47 @@ Noeud::Noeud (string nodeName)
 }//----- Fin du constructeur de Noeud
 
 Noeud::~Noeud()
+//Algorithme :
+//
 {
     #ifdef MAP
         cout << "Appel au destructeur de <Noeud>" << endl;
     #endif
 }//----- Fin du destructeur de Noeud
 
+//----------------------------------------------------- Méthodes publiques
+
 unsigned int Noeud::getCountLinks() const
+// Algorithme :
+//
 {
 	return countLinks;
 } //----- Fin de getCountLinks
 
 const map < string, int > & Noeud::getLinks() const
+// Algorithme :
+//
 {
     return links;
 } //----- Fin de getLinks
 
 const string Noeud::getNodeName() const
+// Algorithme :
+//
 {
     return nodeName;
 } //----- Fin de getNodeName
 
 unsigned int Noeud::getNodeNum() const
+// Algorithme :
+//
 {
     return nodeNum;
 } //----- Fin de getNodeNum
 
 void Noeud::addLink(string nodeName, bool cond)
+// Algorithme :
+//
 {
     if(cond)
     {
@@ -89,6 +111,8 @@ void Noeud::addLink(string nodeName, bool cond)
 } //----- Fin de addLink
 
 int Noeud::arcVal(string doc) const
+// Algorithme :
+//
 {
     int val = -1;
     if(links.count(doc) != 0 )
@@ -100,6 +124,8 @@ int Noeud::arcVal(string doc) const
 
 //------------------------------------------------- Surcharge d'opérateur
 bool Noeud::operator > (const Noeud & newNode) const
+// Algorithme :
+//
 {
     bool compare;
     if(newNode.getCountLinks() != countLinks)

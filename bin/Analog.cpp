@@ -6,7 +6,7 @@
                             & Cavagna Justine  & Hanader Rayan 
 *************************************************************************/
 
-//---------- Réalisation du module <Analog> (fichier Analog.cpp) ------------
+//---------- Réalisation de la classe <Analog> (fichier Analog.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -26,12 +26,15 @@
 using namespace std;
 
 //------------------------------------------------------------- Constantes
-#define DEFAUT  10;
+#define DEFAULT  10;
+
 //----------------------------------------------------------------- PUBLIC
 
-//---------------------------	-------------------------- Méthodes publiques
+//----------------------------------------------------- Méthodes publiques
 
 int main( int argc, char ** argv)
+// Algorithme :
+//
 {
 	
 	bool argsOK = true; 
@@ -42,7 +45,7 @@ int main( int argc, char ** argv)
 	bool logPresence = false;
 	string logName;
 	bool choiceMade = false;
-	int choiceNb = DEFAUT;
+	int choiceNb = DEFAULT;
 
 	for ( int i = 1 ; i < argc && argsOK ; i++ )
 	{
@@ -180,7 +183,7 @@ int main( int argc, char ** argv)
 		myList.showNodes( myGraph.getMostConnected ( choiceNb ) );
 	}
 	return 0;
-}
+} //----- Fin de main
 
 //------------------------------------------------- Surcharge d'opérateurs
 
@@ -191,6 +194,8 @@ int main( int argc, char ** argv)
 //----------------------------------------------------- Méthodes protégées
 
 bool castExtensions( Log & logToTry , Parameters param)
+//Algorithme :
+//
 {
 	static unsigned int extensionsNb = 8;
 	static string excluded[] = {"jpg","js","png","ico","jpeg","gif","css","tiff",};
@@ -199,9 +204,11 @@ bool castExtensions( Log & logToTry , Parameters param)
 		if(logToTry.docType == excluded[i]) return false;
 	}
 	return true;
-}
+} //----- Fin de castExtensions
 
 int hourConvert(string hour)
+// Algorithme :
+//
 {
   for( unsigned int i = 0 ; i < hour.size() ; i++)
     {
@@ -216,9 +223,11 @@ int hourConvert(string hour)
     return -1;
   }
   return Hour;
-}
+} //----- Fin de hourConvert
 
 bool CheckNumber( string nb )
+// Algorithme :
+//
 {
 	for(unsigned int i = 0 ; i < nb.size() ; i++)
   {
@@ -228,14 +237,18 @@ bool CheckNumber( string nb )
 		}
   }
 	return true;
-}
+} //----- Fin de CheckNumber
 
 bool hourCheck ( Log & logToTry , Parameters param)
+// Algorithme :
+//
 {
 	return (logToTry.date.hour == param.intParameter);
-}
+} //----- Fin de hourCheck
 
 bool choiceOnFileWrite()
+// Algorithme :
+//
 {
   cout << "Le fichier est déjà existant. Voulez-vous écrire dessus ?" << endl;
   cout << "Répondez par \"Oui\" ou par \"Non\" "<<endl;
@@ -246,9 +259,11 @@ bool choiceOnFileWrite()
   	return true;
   }
   return false;
-}
+} //----- Fin de choiceOnFileWrite
 
 bool modesCheck( Log logToTry,vector < bool (*)(Log & ,Parameters) > & tests, vector < Parameters > & refr)
+// Algorithme :
+//
 {
 	for (unsigned int i = 0 ; i < tests.size() ; i++ )
 	{
@@ -258,4 +273,4 @@ bool modesCheck( Log logToTry,vector < bool (*)(Log & ,Parameters) > & tests, ve
 		}
 	}
 	return true;
-}
+} //----- Fin de modesCheck

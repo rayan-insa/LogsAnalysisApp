@@ -12,12 +12,10 @@
 
 //--------------------------------------------------- Interfaces utilisées
 
-//---------------------------------------------------Includes système
 #include <string>
 #include <fstream>
 #include <vector>
 
-//---------------------------------------------------Includes personnels
 #include "Noeud.h"
 
 using namespace std; 
@@ -26,6 +24,9 @@ using namespace std;
 //------------------------------------------------------------------ Types
 enum streamState { VALID , ERR_OPEN , ERR_WRITE };
 enum Modes { ABORT , FORCE };
+
+
+
 //------------------------------------------------------------------------
 // Rôle de la classe <Affichage>
 //
@@ -70,15 +71,12 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    Affichage ( );
+    Affichage ();
     // Mode d'emploi : constructeur par défaut de Affichage
-    //
-    // Contrat :
 
-    virtual ~Affichage ( );
+    virtual ~Affichage ();
     // Mode d'emploi :
-    //
-    // Contrat :
+
   
 //------------------------------------------------------------------ PRIVE
 

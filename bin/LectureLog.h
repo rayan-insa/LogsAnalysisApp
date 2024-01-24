@@ -6,7 +6,7 @@
                             & Cavagna Justine  & Hanader Rayan
 *************************************************************************/
 
-//---------- Interface de la classe LectureLog --
+//---------- Interface de la classe <LectureLog> --
 #if ! defined (LECTURE_LOG_H)
 #define LECTURE_LOG_H
 
@@ -78,10 +78,6 @@ public:
     string separate(string& line, string separator);
     // Mode d'emploi :
     // Permet de séparer la chaîne de caractères jusqu'au separateur
-
-
-
-//------------------------------------------------- Surcharge d'opérateurs
 
 
 

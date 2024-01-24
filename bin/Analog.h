@@ -6,7 +6,7 @@
                             & Cavagna Justine  & Hanader Rayan 
 *************************************************************************/
 
-//---------- Interface du module <Analog> (fichier Analog.h) ----------------
+//---------- Interface de la classe <Analog> (fichier Analog.h) ----------------
 #if ! defined ( ANALOG_H )
 #define ANALOG_H
 
@@ -16,12 +16,21 @@
 
 #include "LectureLog.h"
 
-//------------------------------------------------------------------ Types définis
+//------------------------------------------------------------------ Types
 typedef struct Parameters
 {
     string strParameter;
     unsigned int intParameter;
 } Parameters;
+
+
+//------------------------------------------------------------------------
+// Rôle de la classe <Analog>
+//
+//
+//------------------------------------------------------------------------
+
+//----------------------------------------------------- Méthodes publiques
 
 int main( int argc, char** argv );
 // Mode d'emploi : 

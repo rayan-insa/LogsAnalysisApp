@@ -26,6 +26,8 @@ using namespace std;
 
 
 streamState Affichage::Open (string name, Modes mode )
+//Algorithme : 
+//
 {
 	ifstream stream ( name , ios::in );
 	if( stream && mode == Modes::ABORT )
@@ -45,10 +47,12 @@ streamState Affichage::Open (string name, Modes mode )
 	}
 	fileName = name;
 	return streamState::VALID;
-}
+} //----- Fin de Open
 
 
 bool Affichage::showGraph( const map < string , Noeud > & links )
+//Algorithme :
+//
 {
 	if(!outputStream)
 	{
@@ -71,11 +75,13 @@ bool Affichage::showGraph( const map < string , Noeud > & links )
 	}
 	outputStream << "}"<< endl;
 	return true;
-}	
+} //----- Fin de showGraph
 
 
 
 bool Affichage::showGraphLinks( const vector < Noeud > & graph )
+//Algorithme :
+//
 {
 	if(!outputStream)
 	{
@@ -98,25 +104,34 @@ bool Affichage::showGraphLinks( const vector < Noeud > & graph )
 	}
 	outputStream << "}"<< endl;
 	return true;
-}
+} //----- Fin de showGraphLinks
 
 
 void Affichage::Close()
+//Algorithme :
+//
 {
 	if (outputStream) outputStream.close();
-}
+} //----- Fin de Close
 
 
 void Affichage::showNodes( const vector < Noeud > & list )
+//Algorithme :
+//
 {
 	for ( unsigned int i = 0 ;i < list.size(); i ++ )
 	{
 		cout << list[i].getNodeName() << " (" << list[i].getCountLinks() << " hits)" << endl; 
 	}
-}
+} //----- Fin de showNodes
 
+
+
+//-------------------------------------------- Constructeurs - destructeur
 
 Affichage::Affichage ( )
+// Algortihme :
+//
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Affichage>" << endl;
@@ -125,6 +140,8 @@ Affichage::Affichage ( )
 
 
 Affichage::~Affichage ()
+// Algorithme :
+//
 {
 #ifdef MAP
     cout << "Appel au destructeur de <Affichage>" << endl;
