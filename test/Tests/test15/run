@@ -1,0 +1,2 @@
+make 
+./Analog -g anonyme.log > sortie.txt 
