@@ -1,1 +1,2 @@
-cat fichier.txt >sortie.txt
+make
+./analog anonyme.log > sortie.txt
