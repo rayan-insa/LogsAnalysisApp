@@ -88,7 +88,7 @@ void Noeud::addLink(string nodeName, bool cond)
 	countLinks++;
 } //----- Fin de addLink
 
-int Noeud::ArcVal(string doc) const
+int Noeud::arcVal(string doc) const
 {
     int val = -1;
     if(links.count(doc) != 0 )

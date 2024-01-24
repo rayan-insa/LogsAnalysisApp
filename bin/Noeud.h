@@ -35,7 +35,7 @@ public:
 
     void addLink(string referer, bool cond);
     
-    int ArcVal(string doc) const;
+    int arcVal(string doc) const;
 //------------------------------------------------- Surcharge d'opérateur
     bool operator > (const Noeud & newNode) const;
     
