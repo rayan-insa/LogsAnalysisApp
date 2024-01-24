@@ -38,7 +38,7 @@ Noeud::Noeud (string nodeName)
 	#ifdef MAP
         cout << "Appel au constructeur de <Noeud>" << endl;
     #endif
-    this->nodeName = NodeName;
+    this->nodeName = nodeName;
 	countLinks = 0;
     nodeNum = Noeud::countNodes; 
     Noeud::countNodes++;
