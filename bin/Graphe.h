@@ -1,15 +1,16 @@
 /*************************************************************************
-                           Graphe  -  description
+                           Noeud  -  description
                              -------------------
-    début                : 15/01/2021
-    copyright            : (C) 2021 by Chikhi Djalil & Thabet Yasmine  
+    début                : 17/01/2024
+    copyright            : (C) 2024 by Chikhi Djalil & Thabet Yasmine  
                             & Cavagna Justine  & Hanader Rayan 
 *************************************************************************/
 
-//---------- Implémentation de la classe <Graphe> (fichier Graphe.h) --
+//---------- Réalisation de la classe <Graphe> (fichier Graphe.h) --
 #if ! defined (GRAPHE_H)
 #define GRAPHE_H
 
+#include <vector>
 #include <map>
 using namespace std;
 #include "Noeud.h"
@@ -23,17 +24,18 @@ public:
     Graphe();
 
     virtual ~Graphe();
-    const map < string, Noeud > & getTableauLiens();
+    const map < string , Noeud > & getArrayLinks();
 
-    bool addLien(string nomNoeud1, string nomNoeud2, bool condition = true);
+    bool addLink(string nodeName1,string nodeName2,bool cond = true);
 
-    const vector < Noeud > getNoeudsPlusConnectes(int n) const;
+    const vector < Noeud > getMostConnected(int n) const;
 
-//------------------------------------------------------------------ PRIVATE 
+//------------------------------------------------------------------ PRIVE 
 //----------------------------------------------------- Attributs protégés
 protected:
-    map < string, Noeud > tableLiens;
-    unsigned int nombreNoeuds;
+
+    map < string, Noeud > arrayLinks;
+    unsigned int countNodes;
 };
 
 #endif // GRAPHE_H
