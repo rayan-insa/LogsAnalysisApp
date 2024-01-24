@@ -23,11 +23,11 @@ public:
     Graphe();
 
     virtual ~Graphe();
-    const map < string, Noeud > & obtenirTableLiens();
+    const map < string, Noeud > & getTableauLiens();
 
-    bool ajouterLien(string nomNoeud1, string nomNoeud2, bool condition = true);
+    bool addLien(string nomNoeud1, string nomNoeud2, bool condition = true);
 
-    const vector < Noeud > obtenirNoeudsPlusConnectes(int n) const;
+    const vector < Noeud > getNoeudsPlusConnectes(int n) const;
 
 //------------------------------------------------------------------ PRIVATE 
 //----------------------------------------------------- Attributs protégés
