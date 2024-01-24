@@ -63,7 +63,7 @@ bool Graphe::addLink(string nodeName1, string nodeName2, bool cond)
 		countNodes++;
 	}
 	return true;
-} //----- Fin de ajouterLiens
+} //----- Fin de addLink
 
 const vector < Noeud > Graphe::getMostConnected(int n) const
 {
@@ -91,4 +91,4 @@ const vector < Noeud > Graphe::getMostConnected(int n) const
 			return (docA > docB);
 		});
 	return selection;
-} //----- Fin de 
+} //----- Fin de getMostConnected
