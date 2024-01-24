@@ -39,7 +39,7 @@ class Affichage
 public:
 //----------------------------------------------------- Méthodes publiques
 
-    streamState Open( string nom, Modes mode = ABORT );
+    streamState Open( string nom, Modes mode = ABORT ); 
     // Mode d'emploi : 
     // Ouvre le flux d'ecriture vers le chemin spécifié
     // Si un fichier existe deja et que Modes est placé sur ABORT la methode renvoie ERR_wr
