@@ -54,12 +54,12 @@ Noeud::~Noeud()
 unsigned int Noeud::getCountLinks() const
 {
 	return countLinks;
-} //----- Fin de getNombreliens
+} //----- Fin de getCountLinks
 
 const map < string, int > & Noeud::getLinks() const
 {
     return links;
-} //----- Fin de getliens
+} //----- Fin de getLinks
 
 const string Noeud::getNodeName() const
 {
