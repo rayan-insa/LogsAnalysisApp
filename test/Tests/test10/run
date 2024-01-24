@@ -1,0 +1,2 @@
+make 
+./Analog -t heure anonyme.log > sortie.txt 
