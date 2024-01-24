@@ -33,7 +33,7 @@ public:
 //----------------------------------------------------- Attributs protégés
 protected:
     map < string, Noeud > tableLiens;
-    unsigned int nombreNoeuds;
+    unsigned int CountNodes;
 };
 
 #endif // GRAPHE_H
