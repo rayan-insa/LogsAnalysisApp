@@ -17,11 +17,11 @@
 #include "LectureLog.h"
 
 //------------------------------------------------------------------ Types définis
-typedef struct Parametres
+typedef struct Parameters
 {
-    string strParametre;
-    unsigned int intParametre;
-} Parametres;
+    string strParameter;
+    unsigned int intParameter;
+} Parameters;
 
 int main( int argc, char** argv );
 // Mode d'emploi : 
@@ -30,17 +30,17 @@ int main( int argc, char** argv );
 
 //-----------------------------------------------------------Fontions définies
 
-int convertHeure (string heure);
+int hourConvert (string hour);
 
-bool checkNombre (string nombre);
+bool CheckNumber (string nb);
 
-bool checkHeure (Log & LogaEssayer , Parametres param);
+bool hourCheck (Log & logToTry , Parameters param);
     
-bool verifModes(Log LogaEssayer,vector < bool (*)(Log & ,Parametres) > & tests, vector < Parametres > & refr);
+bool modesCheck(Log logToTry,vector < bool (*)(Log & ,Parameters) > & tests, vector < Parameters > & refr);
 
-bool castExtensions (Log & LogaEssayer , Parametres param);
+bool castExtensions (Log & logToTry , Parameters param);
 
-bool choixSurEcritureFichier ();
+bool choiceOnFileWrite ();
 
 
 

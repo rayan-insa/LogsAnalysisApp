@@ -35,23 +35,23 @@ int main( int argc, char ** argv)
 {
 	
 	bool argsOK = true; 
-	vector < bool (*)(Log & ,Parametres) > options;
-	vector < Parametres > parametresFonctions;
-	bool dessinerGraphe = false;
-	string nomGraphe;
-	bool presenceLog = false;
-	string nomLog;
-	bool choixFait = false;
-	int nbChoix = DEFAUT;
-	//bool forceDemande = false; //dqkedaed
+	vector < bool (*)(Log & ,Parameters) > options;
+	vector < Parameters > functionsParameters;
+	bool drawGraph = false;
+	string graphName;
+	bool logPresence = false;
+	string logName;
+	bool choiceMade = false;
+	int choiceNb = DEFAUT;
+
 	for ( int i = 1 ; i < argc && argsOK ; i++ )
 	{
-		string argCourant = argv[ i ] ;
+		string currentArg = argv[ i ] ;
 		if( strlen( argv[i] ) < 1 ) 
 		{
 			argsOK = false;
 		}
-		if( argCourant == "-g" )
+		if( currentArg == "-g" )
 		{
 			if( i == argc -1 )
 			{
@@ -60,12 +60,12 @@ int main( int argc, char ** argv)
 			}
 			else
 			{
-				nomGraphe = argv [ i+1 ];
-				dessinerGraphe = true;
+				graphName = argv [ i+1 ];
+				drawGraph = true;
 				i++;
 			}
 		}
-		else if( argCourant == "-t" )
+		else if( currentArg == "-t" )
 		{
 			if( i == argc -1 )
 			{
@@ -74,8 +74,8 @@ int main( int argc, char ** argv)
 			}
 			else
 			{
-				int heureDebut = convertHeure(argv[ i + 1 ] );
-				if( heureDebut == -1)
+				int startHour = hourConvert(argv[ i + 1 ] );
+				if( startHour == -1)
 				{
 					argsOK = false;
 					cerr << "Erreur : Paramètre non valide pour l'option -t " << endl;
@@ -83,24 +83,24 @@ int main( int argc, char ** argv)
 				else
 				{
 					//creer un pointeur de fonction vers la selection Horaire, la ref, les ajouter dans les vector
-					Parametres parametresHeure = {};
-					parametresHeure.intParametre = heureDebut ;
-					parametresFonctions.push_back(parametresHeure);
-					options.push_back(&checkHeure);
+					Parameters hourParameters = {};
+					hourParameters.intParameter = startHour ;
+					functionsParameters.push_back(hourParameters);
+					options.push_back(&hourCheck);
 					i++;
 				}
 			}
 		}
-		else if( argCourant == "-e")
+		else if( currentArg == "-e")
 		{
-			parametresFonctions.push_back({});
+			functionsParameters.push_back({});
 			options.push_back(&castExtensions);
 		}
 
-		else if (argCourant.size()>4 && argCourant.substr(argCourant.size() - 4) == ".log")
+		else if (currentArg.size()>4 && currentArg.substr(currentArg.size() - 4) == ".log")
 		{
-			presenceLog = true;
-			nomLog = argCourant;
+			logPresence = true;
+			logName = currentArg;
 		}
 		else
 		{
@@ -109,7 +109,7 @@ int main( int argc, char ** argv)
 		}
 	}
 
-	if(!presenceLog && argsOK)
+	if(!logPresence && argsOK)
 	{
 		cerr << "Erreur : pas de log présent" << endl;
 		argsOK = false;
@@ -122,62 +122,62 @@ int main( int argc, char ** argv)
 
 
 	LectureLog curseur; //curseur pour lire les logs
-	if(!curseur.OuvrirFichier(nomLog))
+	if(!curseur.openFile(logName))
 	{
 		cerr << "Erreur : Impossible d'ouvrir le log" << endl;
 		return 1;
 	}
 	//On construit le graphe
-	Graphe monGraphe;
+	Graphe myGraph;
 	bool deb = true;
 	bool empty = true;
-	while( curseur.LogSuivant() )
+	while( curseur.nextLog() )
 	{
-		Log log = curseur.GetLog();
-		if( verifModes( log, options, parametresFonctions ) )
+		Log log = curseur.getLog();
+		if( modesCheck( log, options, functionsParameters ) )
 		{
 			empty = false;
-			monGraphe.ajouterLien( log.referer, log.URL , dessinerGraphe ) ;
+			myGraph.addLink( log.referer, log.URL , drawGraph ) ;
 		}
 		deb = false;
 	}
 	if(deb || empty )
 	{
-		cerr << "Erreur : Le log spécifié est empty" << endl;
+		cerr << "Erreur : Le log spécifié est vide" << endl;
 		return 1;
 	}
-	if( dessinerGraphe ) // On écrit le graphe dans le fichier spécifique
+	if( drawGraph ) // On écrit le graphe dans le fichier spécifique
 	{
-		Affichage graphique;
-		fluxEtat etat = graphique.Open( nomGraphe );
+		Affichage graphic;
+		streamState etat = graphic.Open( graphName );
 		
-		if( etat == ERR_wr )
+		if( etat == ERR_WRITE )
 		{
 			cout<< "Erreur."<<endl;
 		}
-		if( etat == ERR_open)
+		if( etat == ERR_OPEN)
 		{
 			cerr << "Erreur : Erreur d'écriture dans le fichier" << endl;
 			return 1;
 		}
-		else if( etat == VALIDE )
+		else if( etat == VALID )
 		{
-			if(!choixFait)
+			if(!choiceMade)
 			{
-				graphique.AfficherGraphe( monGraphe.getTableauLiens() );
+				graphic.showGraph( myGraph.getArrayLinks() );
 			}
 			else 
 			{
-				graphique.AfficherLiensGraphe( monGraphe.getPlusConnectes ( nbChoix ) );
+				graphic.showGraphLinks( myGraph.getMostConnected ( choiceNb ) );
 			}
 			
-			graphique.Close();
+			graphic.Close();
 		}
 	}
 	else
 	{
-		Affichage maListe;
-		maListe.AfficherNoeuds( monGraphe.getPlusConnectes ( nbChoix ) );
+		Affichage myList;
+		myList.showNodes( myGraph.getMostConnected ( choiceNb ) );
 	}
 	return 0;
 }
@@ -190,39 +190,39 @@ int main( int argc, char ** argv)
 
 //----------------------------------------------------- Méthodes protégées
 
-bool castExtensions( Log & LogaEssayer , Parametres param)
+bool castExtensions( Log & logToTry , Parameters param)
 {
-	static unsigned int nbExtensions = 8;
-	static string exclues[] = {"jpg","js","png","ico","jpeg","gif","css","tiff",};
-	for(unsigned int i = 0 ; i < nbExtensions ; i++ )
+	static unsigned int extensionsNb = 8;
+	static string excluded[] = {"jpg","js","png","ico","jpeg","gif","css","tiff",};
+	for(unsigned int i = 0 ; i < extensionsNb ; i++ )
 	{
-		if(LogaEssayer.typeDoc == exclues[i]) return false;
+		if(logToTry.docType == excluded[i]) return false;
 	}
 	return true;
 }
 
-int convertHeure(string heure)
+int hourConvert(string hour)
 {
-  for( unsigned int i = 0 ; i < heure.size() ; i++)
+  for( unsigned int i = 0 ; i < hour.size() ; i++)
     {
-  	if( !isdigit( heure[i] ) ) //Verification du format
+  	if( !isdigit( hour[i] ) ) //Verification du format
     {
       return -1;
     }
   }
-  int Heure = stoi (heure) ; //Conversion sans risques
-  if( Heure < 0 or Heure > 23 ) //Verification de la cohérence avant retour
+  int Hour = stoi (hour) ; //Conversion sans risques
+  if( Hour < 0 or Hour > 23 ) //Verification de la cohérence avant retour
   {
     return -1;
   }
-  return Heure;
+  return Hour;
 }
 
-bool checkNombre( string nombre )
+bool CheckNumber( string nb )
 {
-	for(unsigned int i = 0 ; i < nombre.size() ; i++)
+	for(unsigned int i = 0 ; i < nb.size() ; i++)
   {
-		if( !isdigit( nombre[i] ) )
+		if( !isdigit( nb[i] ) )
 		{
 			return false;
 		}
@@ -230,29 +230,29 @@ bool checkNombre( string nombre )
 	return true;
 }
 
-bool checkHeure ( Log & LogaEssayer , Parametres param)
+bool hourCheck ( Log & logToTry , Parameters param)
 {
-	return (LogaEssayer.date.heure == param.intParametre);
+	return (logToTry.date.hour == param.intParameter);
 }
 
-bool choixSurEcritureFichier()
+bool choiceOnFileWrite()
 {
   cout << "Le fichier est déjà existant. Voulez-vous écrire dessus ?" << endl;
   cout << "Répondez par \"Oui\" ou par \"Non\" "<<endl;
-  string choix = "";
-  cin >> choix;
-  if(choix=="Oui")
+  string choice = "";
+  cin >> choice;
+  if(choice=="Oui")
   {
   	return true;
   }
   return false;
 }
 
-bool verifModes( Log LogaEssayer,vector < bool (*)(Log & ,Parametres) > & tests, vector < Parametres > & refr)
+bool modesCheck( Log logToTry,vector < bool (*)(Log & ,Parameters) > & tests, vector < Parameters > & refr)
 {
 	for (unsigned int i = 0 ; i < tests.size() ; i++ )
 	{
-		if(!tests[i](LogaEssayer, refr[ i ] ) )
+		if(!tests[i](logToTry, refr[ i ] ) )
 		{
 			return false;
 		}
