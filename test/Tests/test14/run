@@ -1,2 +1,1 @@
-make 
-./Analog -g graphe.dot anonyme.log > sortie.txt 
+./../../../bin/analog -g graphe.dot ./../test_file.log > sortie

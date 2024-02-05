@@ -1,2 +1,1 @@
-make 
-./Analog -t heure anonyme.log > sortie.txt 
+./../../../bin/analog -t heure ./../test_file.log > sortie
