@@ -1,0 +1,2 @@
+./../../../bin/analog -z ./../test_file.log > std.out
+

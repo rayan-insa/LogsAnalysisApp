@@ -1,0 +1,1 @@
+./../../../bin/analog -t heure ./../test_file.log > std.out
