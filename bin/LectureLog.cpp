@@ -73,7 +73,7 @@ bool LectureLog::nextLog() // Lecture des informations du log et écriture dans 
 
     bool isDigit = true;
     string data = separate(line, " \"");
-    for (int i = 0; i < data.size() && isDigit; i++) {
+    for (unsigned int i = 0; i < data.size() && isDigit; i++) {
         isDigit = isdigit(data[i]);
     }
     if (isDigit) {

@@ -1,2 +1,0 @@
-./../../../bin/analog -e -t 5 -g graphe.dot ./../test_file.log > sortie
-

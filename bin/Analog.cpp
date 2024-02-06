@@ -15,6 +15,7 @@
 #include <cstring>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 //------------------------------------------------------ Include personnel
 #include "Analog.h"
@@ -44,6 +45,7 @@ int main( int argc, char ** argv)
 	string graphName;
 	bool logPresence = false;
 	string logName;
+	bool argG = false;
 	bool choiceMade = false;
 	int choiceNb = DEFAULT;
 
@@ -66,6 +68,7 @@ int main( int argc, char ** argv)
 				graphName = argv [ i+1 ];
 				drawGraph = true;
 				i++;
+				argG = true;
 			}
 		}
 		else if( currentArg == "-t" )
@@ -116,6 +119,7 @@ int main( int argc, char ** argv)
 	{
 		cerr << "Erreur : pas de log présent" << endl;
 		argsOK = false;
+		return 1;
 	}
 	if(!argsOK)
 	{
@@ -144,15 +148,21 @@ int main( int argc, char ** argv)
 		}
 		deb = false;
 	}
-	if(deb || empty )
+	if(deb)
 	{
 		cerr << "Erreur : Le log spécifié est vide" << endl;
+		return 1;
+	}
+	if (empty) {
+		cerr << "Pas de pages correspondantes" << endl;
 		return 1;
 	}
 	if( drawGraph ) // On écrit le graphe dans le fichier spécifique
 	{
 		Affichage graphic;
-		streamState etat = graphic.Open( graphName );
+		//streamState etat = graphic.Open(graphName);
+		// Si on veut activer l'écriture dans un fichier .dot qui existe déjà :
+		streamState etat = graphic.Open(graphName,FORCE);
 		
 		if( etat == ERR_WRITE )
 		{
@@ -173,11 +183,13 @@ int main( int argc, char ** argv)
 			{
 				graphic.showGraphLinks( myGraph.getMostConnected ( choiceNb ) );
 			}
-			
+			cout << "Dot-file " << graphName << " generated." << endl;
 			graphic.Close();
 		}
 	}
-	else
+	    vector<bool(*)(Log&, Parameters)>::iterator findt = find(options.begin(), options.end(), &hourCheck);
+		vector<bool(*)(Log&, Parameters)>::iterator finde = find(options.begin(), options.end(), &castExtensions);
+	if ((findt!=options.end()) || (finde!=options.end()) || (options.empty() && !argG))
 	{
 		Affichage myList;
 		myList.showNodes( myGraph.getMostConnected ( choiceNb ) );
@@ -265,6 +277,7 @@ bool modesCheck( Log logToTry,vector < bool (*)(Log & ,Parameters) > & tests, ve
 // Algorithme :
 //
 {
+
 	for (unsigned int i = 0 ; i < tests.size() ; i++ )
 	{
 		if(!tests[i](logToTry, refr[ i ] ) )

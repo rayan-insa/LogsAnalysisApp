@@ -134,7 +134,7 @@ bool Noeud::operator > (const Noeud & newNode) const
     }
     else
     {
-    	compare = (nodeName > newNode.getNodeName());
+    	compare = (nodeName < newNode.getNodeName());
     }
     return compare;
 } //----- Fin de la surcharge de operator >
