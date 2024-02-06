@@ -1,0 +1,2 @@
+./../../bin/analog -t 50 ./../../LogsTests/log9.log
+
