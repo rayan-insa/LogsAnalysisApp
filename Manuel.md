@@ -31,6 +31,18 @@ Une fois l'application compilée, vous pouvez l'exécuter en utilisant la comman
   
 Vous pouvez combiner ces options pour affiner votre analyse. 
 
+## Tests
+
+Pour exécuter des tests automatisés sur l'application accédez au répertoire Tests puis utilisez le script test.sh:
+
+test.sh [répertoire [fichier.csv]]
+
+ Ce script permet de valider le bon fonctionnement de l'application en utilisant des fichiers de configuration pour chaque test. Les résultats des tests seront enregistrés dans un fichier CSV.
+
+Le script mktest.sh recherche et valide tous les tests contenus dans les répertoires dont le nom commence par "Test". utilisez la commande suivante dans le répertoire test:
+
+./mktest.sh
+
 ## Auteurs
 
 Ce projet a été développé par :
