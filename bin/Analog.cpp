@@ -162,9 +162,7 @@ int main( int argc, char ** argv)
 		Affichage graphic;
 		//streamState etat = graphic.Open(graphName);
 		// Si on veut activer l'écriture dans un fichier .dot qui existe déjà :
-		string fullName = "./../graphes/";
-		fullName = fullName + graphName;
-		streamState etat = graphic.Open(fullName,FORCE);
+		streamState etat = graphic.Open(graphName,FORCE);
 		
 		if( etat == ERR_WRITE )
 		{
